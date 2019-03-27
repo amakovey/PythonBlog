@@ -1,29 +1,29 @@
 {% extends "blog/wrapper.html" %}
 {% block content %}
-<center>
+<div class="container">
 {% if posts%}
-<h2><i> History posts </i></h2>
-<br>
 
+        <p class="text-center">History posts</p>
     {% for month in datas%}
-
+        <p class="text-center">{{month}}</p>
     {% for post in posts%}
 
-    {% if post.published_date|date:"m" in month %}
-    <b><h2>{{month}} - 2019 </h2></b>
-    <h2 class="text-info"><a href="/blog/post/{{ post.id }}/">{{ post.title }}</a></h2>
-    <h8 class="text-info">Published: {{ post.published_date }}</h8>
-    </br>
+    {% if post.published_date|date:"F" in month %}
+        <div class="panel panel-default">
+        <div class="panel-heading"><a href="/blog/post/{{ post.id }}/">{{ post.title }}</a></div>
+
+         <div class="panel-body">{{ post.text }} </div>
+
+        </div>
+        <p class="text-right">{{ post.author }}, {{ post.published_date }}  </p>
 
     {% endif %}
     {% endfor %}
-
-
     {% endfor %}
 
 
 {% else %}
 <p> No blog</p>
 {% endif %}
-</center>
+</div>
 {% endblock %}

@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from .forms import LoginForm, RegisterForm,PostForm
 from django.utils import timezone
+import time
 
 
 def index(request):
@@ -42,10 +43,13 @@ def post(request, post_id):
 
 
 def history(request):
-    # user = User.objects.get(id=request.user.id)
+
     posts = Post.objects.all()
-    datas = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-    # datas = {'01':'1', '02':'1', '03':'1', '04':'1', '05':'1', '06':'1', '07':'1', '08':'1', '09':'1', '10':'1', '11':'1', '12':'1'}
+    datas= {}
+    for post in posts:
+        date=post.published_date
+        date2=date.strftime("%B")
+        datas.update({date2:post})
     context = {'posts': posts, 'datas': datas}
     return render(request, 'blog/history.html', context)
 
@@ -100,13 +104,13 @@ def register(request):
     return render(request, 'blog/register.html', args)
 
 def new_post(request):
-    args = {}
-    args['form'] = PostForm()
+    # args = {}
+    # args['form'] = PostForm()
     if request.POST:
         author = User.objects.get(id=request.user.id)
         entry = Post(author=author, title = request.POST['title'], text = request.POST['text'], published_date = timezone.now())
         entry.save()
         return redirect('/')
     else:
-        return render(request, 'blog/newpost.html', args)
-    return render(request, 'blog/newpost.html', args)
+        return render(request, 'blog/newpost.html')
+    return render(request, 'blog/newpost.html')

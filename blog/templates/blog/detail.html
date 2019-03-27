@@ -1,32 +1,34 @@
 {% extends "blog/wrapper.html" %}
 {% block content %}
-<center>
+<div class="container">
 {% if post%}
-<h1><b> Detail info about post </b></h1>
+<div class="panel panel-default">
+    <div class="panel-heading"> {{ post.title }}</div>
+    <div class="panel-body">{{ post.text }}</p></div>
+    <p class="text-right">{{ post.author }}, {{ post.published_date }}</p>
+</div>
+<p class="text-left">Comments:</p>
+    <br/>
+    {% for comment in comments %}
+    <blockquote>{{ comment.text }}
+        <footer>{{comment.author}} {{comment.created_date}}
+        </footer>
+    </blockquote>
+    {% endfor %}
 
-
-            <h3>
-            TITLE: {{ post.title }}</a>
-            TEXT: {{ post.text }}<br>
-                Author: {{ post.author }}</br>
-
-                Published: {{ post.published_date }}</br></h3>
-                Comments:</br></br>
-                {% for comment in comments %}
-                {{ comment.text }}<br/><h6> {{comment.author}} {{comment.created_date}}</h6><br/>
-                {% endfor %}
 {% if user.is_authenticated %}
-  <form action="{% url 'blog:post' post.id %}" method="post">
+    <form class="text-center" action="{% url 'blog:post' post.id %}" method="post">
 {% csrf_token %}
-   <p><strong>Your comment:</strong>
-    <p><textarea name="comment" cols = 100 rows= 8></textarea></p>
+      <p>Your comment:</p>
+    <p class="text-center"><textarea name="comment" cols = 100 rows= 8></textarea></p>
     <input type ="submit" value="Enter"/>
   </form>
+    {% else%}
+    <p>Login for comment</p>
 {% endif %}
-
 
 {% else %}
-<p> No blog</p>
+<p> No post</p>
 {% endif %}
-</center>
+</div>
 {% endblock %}

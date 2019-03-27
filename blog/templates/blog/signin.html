@@ -1,21 +1,17 @@
 {% extends "blog/wrapper.html" %}
 {% block content %}
-<div class="form-group">
-<form action="{% url 'blog:signin' %}" method="post">
-                        {% csrf_token %}
-   <br/> {{ form }}
-                        {% if signin_error %}
+<div class="container">
+<form class="text-center" action="{% url 'blog:signin' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
 
-
-
-    <br/><div class="alert alert-danger" role="alert">
-  {{ signin_error }}
+    <input type="submit"  value="Login"><br/>
+    {% if signin_error %}
+    <br/>
+    <div class="alert alert-danger" role="alert">
+    {{ signin_error }}
+    </div>
+    {% endif %}
+</form>
 </div>
-                        {% endif %}
-
-
-    <input class="btn btn-info" type="submit"  value="Login"><br/>
-                    </form><br/>
-</div>
-
 {% endblock %}

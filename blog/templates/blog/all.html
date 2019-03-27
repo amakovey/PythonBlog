@@ -1,22 +1,22 @@
 {% extends "blog/wrapper.html" %}
 {% block content %}
-<center>
+<div class="container">
 
 {% if latest_post%}
-<h2><i> All posts:</i></h2>
 
-
+        <p class="text-center">All posts:</p>
         {% for post in latest_post%}
-    <h2 class="text-info"><a href="/blog/post/{{ post.id }}/">{{ post.title }}</a></h2>
+        <div class="panel panel-default">
+        <div class="panel-heading"><a href="/blog/post/{{ post.id }}/">{{ post.title }}</a></div>
+            <div class="panel-body">{{ post.text }}</a></div>
+            <p class="text-right">{{ post.author }}, {{ post.published_date }}  </p>
 
-            {% endfor %}
-
-
-<br>
-
+</div>
+        {% endfor %}
 
 {% else %}
-<p> No blog</p>
+
+<p class="text-center"> No blog</p>
 {% endif %}
-    </center>
+</div>
 {% endblock %}
