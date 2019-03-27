@@ -25,11 +25,10 @@ def all(request):
     return render(request, 'blog/all.html', context)
 
 
-def post(request, post_id):
+def post(request, post_id):# переделать под условие
     try:
         title = Post.objects.get(id=post_id)
         author = User.objects.get(id=request.user.id)
-
         text = request.POST['comment']
         comment = Comments(title=title, author=author, text=text)
         comment.save()
@@ -104,8 +103,6 @@ def register(request):
     return render(request, 'blog/register.html', args)
 
 def new_post(request):
-    # args = {}
-    # args['form'] = PostForm()
     if request.POST:
         author = User.objects.get(id=request.user.id)
         entry = Post(author=author, title = request.POST['title'], text = request.POST['text'], published_date = timezone.now())
@@ -114,3 +111,13 @@ def new_post(request):
     else:
         return render(request, 'blog/newpost.html')
     return render(request, 'blog/newpost.html')
+def lk(request):
+    # nick=User.objects.get(username=request.user)
+    latest_post = Post.objects.filter(author_id=request.user.id)
+
+    comments = Comments.objects.filter(author=request.user)
+    # print ("ID",nick.id)
+    # print ("POSTS", latest_post.title)
+
+    context = {'latest_post': latest_post, 'comments': comments}
+    return render(request, 'blog/lk.html', context)

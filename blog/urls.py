@@ -25,5 +25,6 @@ urlpatterns = [
 	url('register/', views.register, name ='register'),
 	url('signout/', views.signout, name='signout'),
 	url('newpost/', views.new_post, name='newpost'),
+	url('lk/', views.lk, name='lk'),
 	url('post/(?P<post_id>[0-9]+)', views.post, name ='post'),
 	]
