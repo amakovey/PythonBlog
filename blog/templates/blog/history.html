@@ -1,0 +1,29 @@
+{% extends "blog/wrapper.html" %}
+{% block content %}
+<center>
+{% if posts%}
+<h2><i> History posts </i></h2>
+<br>
+
+    {% for month in datas%}
+
+    {% for post in posts%}
+
+    {% if post.published_date|date:"m" in month %}
+    <b><h2>{{month}} - 2019 </h2></b>
+    <h2 class="text-info"><a href="/blog/post/{{ post.id }}/">{{ post.title }}</a></h2>
+    <h8 class="text-info">Published: {{ post.published_date }}</h8>
+    </br>
+
+    {% endif %}
+    {% endfor %}
+
+
+    {% endfor %}
+
+
+{% else %}
+<p> No blog</p>
+{% endif %}
+</center>
+{% endblock %}

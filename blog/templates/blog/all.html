@@ -1,0 +1,22 @@
+{% extends "blog/wrapper.html" %}
+{% block content %}
+<center>
+
+{% if latest_post%}
+<h2><i> All posts:</i></h2>
+
+
+        {% for post in latest_post%}
+    <h2 class="text-info"><a href="/blog/post/{{ post.id }}/">{{ post.title }}</a></h2>
+
+            {% endfor %}
+
+
+<br>
+
+
+{% else %}
+<p> No blog</p>
+{% endif %}
+    </center>
+{% endblock %}

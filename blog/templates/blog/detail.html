@@ -1,0 +1,32 @@
+{% extends "blog/wrapper.html" %}
+{% block content %}
+<center>
+{% if post%}
+<h1><b> Detail info about post </b></h1>
+
+
+            <h3>
+            TITLE: {{ post.title }}</a>
+            TEXT: {{ post.text }}<br>
+                Author: {{ post.author }}</br>
+                Created: {{ post.created_date }}</br>
+                Published: {{ post.published_date }}</br></h3>
+                Comments:</br></br>
+                {% for comment in comments %}
+                {{ comment.text }}<br/><h6> {{comment.author}} {{comment.created_date}}</h6><br/>
+                {% endfor %}
+{% if user.is_authenticated %}
+  <form action="{% url 'blog:post' post.id %}" method="post">
+{% csrf_token %}
+   <p><strong>Your comment:</strong>
+    <p><textarea name="comment" cols = 100 rows= 8></textarea></p>
+    <input type ="submit" value="Enter"/>
+  </form>
+{% endif %}
+
+
+{% else %}
+<p> No blog</p>
+{% endif %}
+</center>
+{% endblock %}

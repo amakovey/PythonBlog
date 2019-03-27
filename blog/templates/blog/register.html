@@ -1,0 +1,23 @@
+{% extends "blog/wrapper.html" %}
+{% block content %}
+<div class="form-group">
+
+<form action="{% url 'blog:register' %}" method="post">
+
+                        {% csrf_token %}
+                        {{ form }}<br/>
+
+    {% if register_error %}
+
+
+
+    <br/><div class="alert alert-danger" role="alert">
+  {{ register_error }}
+</div>{% endif %}
+                        <input type="submit"  value="Register"><br/>
+                    </form>
+
+</div>
+
+{% endblock %}
+
