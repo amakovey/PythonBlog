@@ -8,7 +8,8 @@ from django.http import Http404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm,PostForm
+from django.utils import timezone
 
 
 def index(request):
@@ -97,3 +98,15 @@ def register(request):
             args['register_error'] = 'User already exists !'
             return render(request, 'blog/register.html', args)
     return render(request, 'blog/register.html', args)
+
+def new_post(request):
+    args = {}
+    args['form'] = PostForm()
+    if request.POST:
+        author = User.objects.get(id=request.user.id)
+        entry = Post(author=author, title = request.POST['title'], text = request.POST['text'], published_date = timezone.now())
+        entry.save()
+        return redirect('/')
+    else:
+        return render(request, 'blog/newpost.html', args)
+    return render(request, 'blog/newpost.html', args)

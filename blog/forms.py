@@ -15,3 +15,8 @@ class RegisterForm(forms.Form):
     password = forms.CharField( label='Password: ', max_length=20, widget=forms.PasswordInput)
     email = forms.EmailField(label='E-mail: ', max_length=30, widget=forms.TextInput)
 
+class PostForm(forms.Form):
+
+
+    title = forms.CharField(label='Title: ', max_length=200, widget=forms.TextInput)
+    text = forms.CharField(label='Text: ', max_length=2000, widget=forms.TextInput)

@@ -14,7 +14,8 @@
 
     {% if user.is_authenticated %}
     <center><b>Hello, {{user}} !</b><br/></center>
-    <center><a href="{% url 'blog:signout' %}" class="btn btn-info"> LOGOUT </a></center>
+    <center><a href="{% url 'blog:signout' %}" class="btn btn-info"> LOGOUT </a>
+    <a href="{% url 'blog:newpost' %}" class="btn btn-info"> NEW POST </a></>
 {% else %}
 <center><b>Hello, guest !</b><br/></center>
 <center>

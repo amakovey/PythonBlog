@@ -1,0 +1,13 @@
+{% extends "blog/wrapper.html" %}
+{% block content %}
+<div class="form-group">
+<form action="{% url 'blog:newpost' %}" method="post">
+                        {% csrf_token %}
+   <br/> {{ form }}
+
+
+    <input class="btn btn-info" type="submit"  value="Publish"><br/>
+                    </form><br/>
+</div>
+
+{% endblock %}
