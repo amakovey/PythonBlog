@@ -3,15 +3,26 @@
 <div class="container">
 <form class="text-center" action="{% url 'blog:signin' %}" method="post">
     {% csrf_token %}
-    {{ form }}
-
-    <input type="submit"  value="Login"><br/>
-    {% if signin_error %}
-    <br/>
-    <div class="alert alert-danger" role="alert">
-    {{ signin_error }}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            Nickname:
+        </div>
+        <input type="login" name="login" maxlength="20" required>
+        <div class="panel-body">
+            Password:
+        </div>
+        <input type="password" name="password" maxlength="20" required>
+        <br/>
+        <br/>
+        <input type="submit" value="Login">
+        {% if signin_error %}
+        <br/>
+        <br/>
+        <div class="alert alert-danger" role="alert">
+            {{ signin_error }}
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 </form>
 </div>
 {% endblock %}

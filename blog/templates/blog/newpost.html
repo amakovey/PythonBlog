@@ -1,17 +1,20 @@
 {% extends "blog/wrapper.html" %}
 {% block content %}
 <div class="container">
-<form class="text-center" action="{% url 'blog:newpost' %}" method="post">
-                        {% csrf_token %}
-<div class="panel panel-default">
-    <div class="panel-body">Title:</div>
-    <textarea name="title" cols = 100 rows= 1 maxlength="200" required> </textarea>
-     <div class="panel-body">Text:</div>
-    <textarea name="text" cols = 100 rows= 10 maxlength="2000" required></textarea><br/>
-
-    <input type="submit"  value="Publish">
+    <form class="text-center" action="{% url 'blog:newpost' %}" method="post">
+        {% csrf_token %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                Title:
+            </div>
+            <textarea name="title" cols = 100 rows= 1 maxlength="200" required></textarea>
+            <div class="panel-body">
+                Text:
+            </div>
+            <textarea name="text" cols = 100 rows= 10 maxlength="2000" required></textarea>
+            <br/>
+            <input type="submit" value="Publish">
+        </div>
+    </form>
 </div>
-</form>
-</div>
-
 {% endblock %}
